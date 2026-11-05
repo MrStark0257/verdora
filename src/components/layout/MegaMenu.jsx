@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { categories } from '../../data/products';
 import { ArrowRight, Sparkles } from 'lucide-react';
+import { getAssetUrl } from '../../utils/assetUrl';
 
 export default function MegaMenu({ isOpen, onClose }) {
   return (
@@ -44,7 +45,7 @@ export default function MegaMenu({ isOpen, onClose }) {
                     >
                       <div className="w-12 h-12 rounded-editorial overflow-hidden shrink-0 bg-forest/5">
                         <img
-                          src={cat.image}
+                          src={getAssetUrl(cat.image)}
                           alt={cat.name}
                           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                         />

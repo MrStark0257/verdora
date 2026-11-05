@@ -8,6 +8,7 @@ import Rating from '../components/ui/Rating';
 import Badge from '../components/ui/Badge';
 import { useWishlist } from '../context/WishlistContext';
 import { useCart } from '../context/CartContext';
+import { getAssetUrl } from '../utils/assetUrl';
 import { Heart, ShoppingBag, Trash2, ArrowRight, Sparkles, Sun, Droplets } from 'lucide-react';
 
 export default function Wishlist() {
@@ -68,7 +69,7 @@ export default function Wishlist() {
                 <div className="relative aspect-[4/5] bg-cream/40 overflow-hidden">
                   <Link to={`/product/${product.slug}`} className="block w-full h-full">
                     <img
-                      src={product.images?.[0] || product.image}
+                      src={getAssetUrl(product.images?.[0] || product.image)}
                       alt={product.name}
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />

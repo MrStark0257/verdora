@@ -5,6 +5,7 @@ import Navbar from '../components/layout/Navbar';
 import Footer from '../components/layout/Footer';
 import Button from '../components/ui/Button';
 import { useCart } from '../context/CartContext';
+import { getAssetUrl } from '../utils/assetUrl';
 import {
   Trash2,
   Plus,
@@ -136,7 +137,7 @@ export default function Cart() {
                     <div className="flex gap-4 items-center">
                       <Link to={`/product/${item.slug}`} className="w-20 h-24 rounded-editorial overflow-hidden shrink-0 bg-cream border border-forest/10">
                         <img
-                          src={item.images?.[0] || item.image}
+                          src={getAssetUrl(item.images?.[0] || item.image)}
                           alt={item.name}
                           className="w-full h-full object-cover"
                         />

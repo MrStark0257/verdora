@@ -8,6 +8,7 @@ import FilterSidebar from '../components/shop/FilterSidebar';
 import ProductCard from '../components/product/ProductCard';
 import Button from '../components/ui/Button';
 import { categories, products } from '../data/products';
+import { getAssetUrl } from '../utils/assetUrl';
 import { ArrowLeft, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -147,7 +148,7 @@ export default function CategoryPage() {
       <section className="relative bg-forest text-cream py-16 sm:py-24 px-6 sm:px-12 overflow-hidden border-b border-forest-800">
         <div className="absolute inset-0 z-0">
           <img
-            src={currentCategory.image}
+            src={getAssetUrl(currentCategory.image)}
             alt={currentCategory.name}
             className="w-full h-full object-cover opacity-20 scale-105"
           />

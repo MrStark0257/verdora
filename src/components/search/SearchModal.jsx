@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Search, X, ArrowRight, Sparkles } from 'lucide-react';
 import { useUI } from '../../context/UIContext';
 import { products, categories } from '../../data/products';
+import { getAssetUrl } from '../../utils/assetUrl';
 
 export default function SearchModal() {
   const { isSearchOpen, setIsSearchOpen, openQuickView } = useUI();
@@ -163,7 +164,7 @@ export default function SearchModal() {
                       >
                         <div className="w-12 h-14 rounded-editorial overflow-hidden bg-cream shrink-0">
                           <img
-                            src={p.images?.[0] || p.image}
+                            src={getAssetUrl(p.images?.[0] || p.image)}
                             alt={p.name}
                             className="w-full h-full object-cover"
                           />

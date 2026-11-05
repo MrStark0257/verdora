@@ -8,6 +8,7 @@ import Input from '../components/ui/Input';
 import RazorpayModal from '../components/checkout/RazorpayModal';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
+import { getAssetUrl } from '../utils/assetUrl';
 import {
   ShieldCheck,
   Truck,
@@ -149,7 +150,7 @@ export default function Checkout() {
                 {confirmedOrder.items.map((item, idx) => (
                   <div key={idx} className="py-2.5 flex items-center justify-between text-xs">
                     <div className="flex items-center gap-3">
-                      <img src={item.images?.[0] || item.image} alt="" className="w-10 h-12 object-cover rounded bg-cream" />
+                      <img src={getAssetUrl(item.images?.[0] || item.image)} alt="" className="w-10 h-12 object-cover rounded bg-cream" />
                       <div>
                         <span className="font-serif font-medium text-forest block">{item.name}</span>
                         <span className="text-charcoal/50">{item.quantity}× ₹{item.price.toLocaleString('en-IN')}</span>
@@ -435,7 +436,7 @@ export default function Checkout() {
                     <div key={item.id} className="py-2.5 flex items-center justify-between text-xs">
                       <div className="flex items-center gap-3">
                         <img
-                          src={item.images?.[0] || item.image}
+                          src={getAssetUrl(item.images?.[0] || item.image)}
                           alt=""
                           className="w-10 h-12 object-cover rounded bg-cream border border-forest/10"
                         />

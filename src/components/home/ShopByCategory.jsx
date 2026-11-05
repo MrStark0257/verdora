@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import { categories } from '../../data/products';
+import { getAssetUrl } from '../../utils/assetUrl';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -73,7 +74,7 @@ export default function ShopByCategory() {
             >
               {/* Background Category Image with Smooth Zoom */}
               <img
-                src={cat.image}
+                src={getAssetUrl(cat.image)}
                 alt={cat.name}
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                 loading="lazy"

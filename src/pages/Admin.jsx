@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { products as initialProducts } from '../data/products';
+import { getAssetUrl } from '../utils/assetUrl';
 import Button from '../components/ui/Button';
 import Badge from '../components/ui/Badge';
 import Input from '../components/ui/Input';
@@ -811,7 +812,7 @@ export default function Admin() {
                         <td className="py-3.5">
                           <div className="flex items-center gap-3">
                             <img
-                              src={prod.image}
+                              src={getAssetUrl(prod.image)}
                               alt={prod.name}
                               className="w-10 h-10 rounded-lg object-cover bg-cream border border-forest/10"
                             />
