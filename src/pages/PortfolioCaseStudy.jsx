@@ -140,7 +140,7 @@ export default function PortfolioCaseStudy() {
 **Tech Stack:** React, Vite, Tailwind CSS, Framer Motion, React Router, Lucide React
 **Project Type:** Concept Project | **Status:** Completed
 
-- **Live Storefront Demo:** https://verdora-botanical.vercel.app
+- **Live Storefront Demo (GitHub Pages):** https://sanchitsharma217-arch.github.io/verdora/
 - **GitHub Repository:** https://github.com/sanchitsharma217-arch/verdora
 - **Key Features:** 18 complete routes, cinematic preloader intro, multi-faceted product filtering, interactive 4-step plant diagnostic quiz, Razorpay gateway simulation, 4-stage logistics telemetry tracking, protected staff admin inventory center, and 100% responsive zero-overflow mobile layout.`;
 

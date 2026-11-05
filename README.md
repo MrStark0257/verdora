@@ -17,12 +17,12 @@
 [![React](https://img.shields.io/badge/React_19-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![Framer Motion](https://img.shields.io/badge/Framer_Motion-black?style=for-the-badge&logo=framer&logoColor=blue)](https://www.framer.com/motion/)
-[![Vercel Deployment](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://verdora-botanical.vercel.app)
+[![GitHub Pages](https://img.shields.io/badge/GitHub_Pages-222222?style=for-the-badge&logo=githubpages&logoColor=white)](https://sanchitsharma217-arch.github.io/verdora/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-183D2B?style=for-the-badge)](LICENSE)
 
 <br />
 
-### 🌿 [Launch Live Storefront](https://verdora-botanical.vercel.app) &nbsp;•&nbsp; 📖 [View Portfolio Case Study](https://verdora-botanical.vercel.app/portfolio) &nbsp;•&nbsp; 🔐 [Admin Atelier Portal](https://verdora-botanical.vercel.app/admin)
+### 🌿 [Launch Live Storefront](https://sanchitsharma217-arch.github.io/verdora/) &nbsp;•&nbsp; 📖 [View Portfolio Case Study](https://sanchitsharma217-arch.github.io/verdora/portfolio) &nbsp;•&nbsp; 🔐 [Admin Atelier Portal](https://sanchitsharma217-arch.github.io/verdora/admin)
 
 ---
 
@@ -191,11 +191,12 @@ npm run preview
 
 ---
 
-## ☁️ Deployment
+## ☁️ Deployment & GitHub Actions
 
-Deploy your own live version on **Vercel** with one click:
+This repository includes a continuous integration and deployment workflow ([`.github/workflows/deploy.yml`](.github/workflows/deploy.yml)) that automatically compiles and deploys every commit to **GitHub Pages**:
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/sanchitsharma217-arch/verdora)
+* **Automated CI/CD:** Powered by official `actions/deploy-pages@v4`.
+* **Zero 404 Routing:** Configured with single-page application URL restoration scripts (`public/404.html`) and React Router base path routing.
 
 ---
 
@@ -207,7 +208,7 @@ Deploy your own live version on **Vercel** with one click:
 | **Project Type** | Senior Frontend Engineering Showcase |
 | **Category** | Luxury Botanical E-Commerce |
 | **Status** | Production-Ready Demonstration |
-| **Live Showcase** | [https://verdora-botanical.vercel.app](https://verdora-botanical.vercel.app) |
+| **Live GitHub Showcase** | [https://sanchitsharma217-arch.github.io/verdora/](https://sanchitsharma217-arch.github.io/verdora/) |
 
 ---
 
@@ -217,3 +218,4 @@ Crafted with botanical passion & modern React engineering.
 **VERDORA — Bring Nature Into Your Space.**
 
 </div>
+

@@ -153,7 +153,7 @@ export default function App() {
       <UIProvider>
         <WishlistProvider>
           <CartProvider>
-            <Router>
+            <Router basename={import.meta.env.BASE_URL}>
               {showPreloader && <Preloader onComplete={handlePreloaderComplete} />}
               <ScrollToTop />
               <AnimatedRoutes />
