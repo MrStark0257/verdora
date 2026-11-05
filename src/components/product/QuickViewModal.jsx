@@ -20,6 +20,7 @@ import { useWishlist } from '../../context/WishlistContext';
 import Button from '../ui/Button';
 import Badge from '../ui/Badge';
 import Rating from '../ui/Rating';
+import { getAssetUrl } from '../../utils/assetUrl';
 
 export default function QuickViewModal() {
   const { quickViewProduct, closeQuickView } = useUI();
@@ -32,7 +33,7 @@ export default function QuickViewModal() {
 
   const product = quickViewProduct;
   const isFavorited = product ? isInWishlist(product.id) : false;
-  const images = product ? (product.images && product.images.length > 0 ? product.images : [product.image]) : [];
+  const images = product ? (product.images && product.images.length > 0 ? product.images.map(getAssetUrl) : [getAssetUrl(product.image)]) : [];
 
   const handleAddToCart = () => {
     if (!product) return;

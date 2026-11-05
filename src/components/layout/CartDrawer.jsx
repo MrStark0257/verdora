@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Plus, Minus, Trash2, ArrowRight, ShoppingBag, Sparkles, Truck, Check } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
 import Button from '../ui/Button';
+import { getAssetUrl } from '../../utils/assetUrl';
 
 export default function CartDrawer() {
   const {
@@ -144,7 +145,7 @@ export default function CartDrawer() {
                         className="w-20 h-24 rounded-editorial overflow-hidden shrink-0 bg-cream block relative group"
                       >
                         <img
-                          src={item.images?.[0] || item.image}
+                          src={getAssetUrl(item.images?.[0] || item.image)}
                           alt={item.name}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                         />

@@ -2,6 +2,7 @@
  * VERDORA Botanical Catalog Data
  * Rich plant data with botanical metrics, care instructions, INR pricing, and high-res photography.
  */
+import { getAssetUrl } from '../utils/assetUrl';
 
 export const categories = [
   {
@@ -37,7 +38,7 @@ export const categories = [
     slug: 'flowering',
     tagline: 'Seasonal blooms and fragrant organic accents.',
     description: 'Infuse vibrant botanical color, delicate petals, and uplifting natural scents into your home.',
-    image: '/plants/flowering-category.jpg',
+    image: getAssetUrl('/plants/flowering-category.jpg'),
     itemCount: 14,
   },
   {
@@ -301,8 +302,8 @@ export const products = [
     description:
       'The largest member of the Peace Lily family. Sensation is a powerhouse botanical air cleaner that telegraphs its hydration needs clearly by gently bowing its leaves when thirsty.',
     images: [
-      '/plants/peace-lily-1.jpg',
-      '/plants/peace-lily-2.jpg',
+      getAssetUrl('/plants/peace-lily-1.jpg'),
+      getAssetUrl('/plants/peace-lily-2.jpg'),
     ],
     care: {
       light: 'Exceptional in low to moderate indirect light. Never direct sun.',
@@ -553,7 +554,7 @@ export const products = [
     description:
       'The sacred Mogra plant brings intoxicating natural floral perfume to sunny balconies and garden borders. Produces continuous flushes of porcelain white rosettes throughout warm months.',
     images: [
-      '/plants/arabian-jasmine.jpg',
+      getAssetUrl('/plants/arabian-jasmine.jpg'),
       'https://images.unsplash.com/photo-1598880940371-c756e015fea1?auto=format&fit=crop&w=1000&q=80',
     ],
     care: {
@@ -625,7 +626,7 @@ export const products = [
     description:
       'Transform terrace railings and garden walls into Mediterranean masterpieces. Bougainvillea thrives under relentless heat, rewarding low watering with explosive floral color.',
     images: [
-      '/plants/bougainvillea.jpg',
+      getAssetUrl('/plants/bougainvillea.jpg'),
       'https://images.unsplash.com/photo-1598880940371-c756e015fea1?auto=format&fit=crop&w=1000&q=80',
     ],
     care: {

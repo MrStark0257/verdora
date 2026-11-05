@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Heart, Eye, Plus, Check, Sun, Droplets, Sparkles } from 'lucide-react';
 import Badge from '../ui/Badge';
 import Rating from '../ui/Rating';
+import { getAssetUrl } from '../../utils/assetUrl';
 import { useCart } from '../../context/CartContext';
 import { useWishlist } from '../../context/WishlistContext';
 import { useUI } from '../../context/UIContext';
@@ -37,8 +38,10 @@ export default function ProductCard({ product }) {
     openQuickView(product);
   };
 
-  const mainImage = product.images?.[0] || product.image;
-  const secondaryImage = product.images?.[1] || mainImage;
+  const rawMain = product.images?.[0] || product.image;
+  const rawSec = product.images?.[1] || rawMain;
+  const mainImage = getAssetUrl(rawMain);
+  const secondaryImage = getAssetUrl(rawSec);
 
   return (
     <motion.div

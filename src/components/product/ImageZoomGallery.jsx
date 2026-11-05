@@ -2,13 +2,15 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Maximize2, ShieldCheck, Sparkles, Award } from 'lucide-react';
 import Badge from '../ui/Badge';
+import { getAssetUrl } from '../../utils/assetUrl';
 
 export default function ImageZoomGallery({ images = [], name, isBestseller, isRare, isPetSafe }) {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isZoomed, setIsZoomed] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
-  const activeImage = images[selectedIndex] || images[0];
+  const rawImage = images[selectedIndex] || images[0];
+  const activeImage = getAssetUrl(rawImage);
 
   const handleMouseMove = (e) => {
     const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
@@ -69,7 +71,7 @@ export default function ImageZoomGallery({ images = [], name, isBestseller, isRa
                   : 'border-transparent opacity-70 hover:opacity-100'
               }`}
             >
-              <img src={img} alt={`${name} view ${idx + 1}`} className="w-full h-full object-cover" />
+              <img src={getAssetUrl(img)} alt={`${name} view ${idx + 1}`} className="w-full h-full object-cover" />
             </button>
           ))}
         </div>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../components/brand/Logo';
+import { getAssetUrl } from '../utils/assetUrl';
 import Button from '../components/ui/Button';
 import Badge from '../components/ui/Badge';
 import {
@@ -36,91 +37,91 @@ const SCREENSHOTS = [
     title: 'Editorial Homepage',
     category: 'desktop',
     desc: '13 cohesive editorial sections, sticky transparent-to-solid navbar, and botanical storytelling.',
-    src: '/showcase/desktop-homepage.png',
+    src: getAssetUrl('/showcase/desktop-homepage.png'),
   },
   {
     id: 'shop-catalog',
     title: 'Shop Catalog & Multi-Faceted Filters',
     category: 'desktop',
     desc: 'Price slider, light intensity, care difficulty, pet-safety toggles, and 3/4 column grid switcher.',
-    src: '/showcase/shop-catalog.png',
+    src: getAssetUrl('/showcase/shop-catalog.png'),
   },
   {
     id: 'product-detail',
     title: 'Product Detail & Care Specifications',
     category: 'desktop',
     desc: 'Interactive image gallery, sunlight/watering meters, customer reviews, and quantity management.',
-    src: '/showcase/product-detail.png',
+    src: getAssetUrl('/showcase/product-detail.png'),
   },
   {
     id: 'plant-finder',
     title: 'Interactive Plant Diagnostic Finder',
     category: 'desktop',
     desc: '4-step recommendation questionnaire matching living spaces to optimal plant species.',
-    src: '/showcase/plant-finder.png',
+    src: getAssetUrl('/showcase/plant-finder.png'),
   },
   {
     id: 'checkout-razorpay',
     title: 'Razorpay Payment Gateway Simulation',
     category: 'desktop',
     desc: '256-bit encrypted checkout modal simulating UPI/QR, Cards, and Netbanking authorization.',
-    src: '/showcase/checkout-razorpay.png',
+    src: getAssetUrl('/showcase/checkout-razorpay.png'),
   },
   {
     id: 'order-tracking',
     title: 'Botanical Climate Logistics Telemetry',
     category: 'desktop',
     desc: 'Live 4-stage tracking timeline, courier coordinates, root cocoon wrap status, and arrival care tips.',
-    src: '/showcase/order-tracking.png',
+    src: getAssetUrl('/showcase/order-tracking.png'),
   },
   {
     id: 'admin-dashboard',
     title: 'Protected Atelier Admin Command Center',
     category: 'desktop',
     desc: 'Financial KPIs, order fulfillment status updater, live inventory stock control, and customer directory.',
-    src: '/showcase/admin-dashboard.png',
+    src: getAssetUrl('/showcase/admin-dashboard.png'),
   },
   {
     id: 'plant-care',
     title: 'Plant Care Journal & Clinic',
     category: 'desktop',
     desc: 'Curated editorial guides, seasonal watering protocols, and botanical diagnostic clinic.',
-    src: '/showcase/plant-care.png',
+    src: getAssetUrl('/showcase/plant-care.png'),
   },
   {
     id: 'about-page',
     title: 'Brand Maison & Sustainability Pledge',
     category: 'desktop',
     desc: 'Brand philosophy, 100% peat-free organic substrate guarantee, and botanist curator profiles.',
-    src: '/showcase/about-page.png',
+    src: getAssetUrl('/showcase/about-page.png'),
   },
   {
     id: 'contact-page',
     title: 'Concierge Clinic & Atelier Locations',
     category: 'desktop',
     desc: 'Interactive concierge form with validation, automated ticket generation, and atelier addresses.',
-    src: '/showcase/contact-page.png',
+    src: getAssetUrl('/showcase/contact-page.png'),
   },
   {
     id: 'mobile-home',
     title: 'Mobile Homepage Experience',
     category: 'mobile',
     desc: 'Fully responsive mobile drawer, optimized touch tap targets, and zero horizontal overflow.',
-    src: '/showcase/mobile-homepage.png',
+    src: getAssetUrl('/showcase/mobile-homepage.png'),
   },
   {
     id: 'mobile-track',
     title: 'Mobile Parcel Tracking',
     category: 'mobile',
     desc: 'Adaptive mobile courier timeline and live order progress indicators.',
-    src: '/showcase/mobile-track-order.png',
+    src: getAssetUrl('/showcase/mobile-track-order.png'),
   },
   {
     id: 'mobile-admin',
     title: 'Mobile Admin Inventory Controller',
     category: 'mobile',
     desc: 'Responsive touch-friendly management tables and quick stock adjustment controls.',
-    src: '/showcase/mobile-admin.png',
+    src: getAssetUrl('/showcase/mobile-admin.png'),
   },
 ];
 
