@@ -484,7 +484,7 @@ export default function TrackOrder() {
                     >
                       <div className="w-16 h-16 rounded-xl overflow-hidden bg-cream shrink-0 border border-forest/10">
                         <img
-                          src={getAssetUrl(item.image)}
+                          src={getAssetUrl(item.images?.[0] || item.image)}
                           alt={item.name}
                           className="w-full h-full object-cover"
                         />
