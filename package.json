@@ -1,0 +1,35 @@
+{
+  "name": "verdora",
+  "private": true,
+  "version": "1.0.0",
+  "description": "VERDORA — Luxury Botanical E-Commerce Experience. Bring Nature Into Your Space.",
+  "author": "sanchitsharma217-arch",
+  "homepage": "https://verdora-botanical.vercel.app",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sanchitsharma217-arch/verdora.git"
+  },
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.2.1",
+    "autoprefixer": "^10.6.2",
+    "postcss": "^8.5.32",
+    "puppeteer": "^25.16.0",
+    "tailwindcss": "^3.4.19",
+    "typescript": "~7.0.2",
+    "vite": "^8.3.6"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.119.0",
+    "framer-motion": "^14.9.1",
+    "lucide-react": "^1.69.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "react-router-dom": "^7.18.5"
+  }
+}

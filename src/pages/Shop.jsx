@@ -1,0 +1,384 @@
+import React, { useState, useMemo } from 'react';
+import AnnouncementBar from '../components/layout/AnnouncementBar';
+import Navbar from '../components/layout/Navbar';
+import Footer from '../components/layout/Footer';
+import ShopHeader from '../components/shop/ShopHeader';
+import FilterSidebar from '../components/shop/FilterSidebar';
+import ProductCard from '../components/product/ProductCard';
+import Button from '../components/ui/Button';
+import { products } from '../data/products';
+import { X, RotateCcw, Sparkles } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+
+export default function Shop() {
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [priceRange, setPriceRange] = useState(4000);
+  const [selectedSunlight, setSelectedSunlight] = useState([]);
+  const [selectedDifficulty, setSelectedDifficulty] = useState([]);
+  const [selectedSize, setSelectedSize] = useState([]);
+  const [petSafeOnly, setPetSafeOnly] = useState(false);
+  const [airPurifierOnly, setAirPurifierOnly] = useState(false);
+  const [rareOnly, setRareOnly] = useState(false);
+  const [bestsellerOnly, setBestsellerOnly] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [sortBy, setSortBy] = useState('featured');
+  const [gridCols, setGridCols] = useState(3);
+  const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
+
+  // Toggle Handlers
+  const handleToggleSunlight = (val) => {
+    setSelectedSunlight((prev) =>
+      prev.includes(val) ? prev.filter((i) => i !== val) : [...prev, val]
+    );
+  };
+
+  const handleToggleDifficulty = (val) => {
+    setSelectedDifficulty((prev) =>
+      prev.includes(val) ? prev.filter((i) => i !== val) : [...prev, val]
+    );
+  };
+
+  const handleToggleSize = (val) => {
+    setSelectedSize((prev) =>
+      prev.includes(val) ? prev.filter((i) => i !== val) : [...prev, val]
+    );
+  };
+
+  const handleResetFilters = () => {
+    setSelectedCategory('all');
+    setPriceRange(4000);
+    setSelectedSunlight([]);
+    setSelectedDifficulty([]);
+    setSelectedSize([]);
+    setPetSafeOnly(false);
+    setAirPurifierOnly(false);
+    setRareOnly(false);
+    setBestsellerOnly(false);
+    setSearchQuery('');
+  };
+
+  // Calculate active filter count
+  const activeFilterCount = useMemo(() => {
+    let count = 0;
+    if (selectedCategory !== 'all') count += 1;
+    if (priceRange < 4000) count += 1;
+    count += selectedSunlight.length;
+    count += selectedDifficulty.length;
+    count += selectedSize.length;
+    if (petSafeOnly) count += 1;
+    if (airPurifierOnly) count += 1;
+    if (rareOnly) count += 1;
+    if (bestsellerOnly) count += 1;
+    if (searchQuery.trim()) count += 1;
+    return count;
+  }, [
+    selectedCategory,
+    priceRange,
+    selectedSunlight,
+    selectedDifficulty,
+    selectedSize,
+    petSafeOnly,
+    airPurifierOnly,
+    rareOnly,
+    bestsellerOnly,
+    searchQuery,
+  ]);
+
+  // Filter & Sort Logic
+  const filteredProducts = useMemo(() => {
+    return products
+      .filter((p) => {
+        // Category
+        if (selectedCategory !== 'all' && p.category !== selectedCategory) return false;
+
+        // Price
+        if (p.price > priceRange) return false;
+
+        // Sunlight
+        if (
+          selectedSunlight.length > 0 &&
+          !selectedSunlight.some((light) => p.sunlight?.includes(light))
+        ) {
+          return false;
+        }
+
+        // Difficulty
+        if (
+          selectedDifficulty.length > 0 &&
+          !selectedDifficulty.includes(p.difficulty)
+        ) {
+          return false;
+        }
+
+        // Size
+        if (
+          selectedSize.length > 0 &&
+          !selectedSize.some((size) => p.size?.includes(size))
+        ) {
+          return false;
+        }
+
+        // Special toggles
+        if (petSafeOnly && !p.isPetSafe) return false;
+        if (airPurifierOnly && !p.isAirPurifier) return false;
+        if (rareOnly && !p.isRare) return false;
+        if (bestsellerOnly && !p.isBestseller) return false;
+
+        // Search Query
+        if (searchQuery.trim()) {
+          const q = searchQuery.toLowerCase();
+          const match =
+            p.name.toLowerCase().includes(q) ||
+            p.botanicalName?.toLowerCase().includes(q) ||
+            p.category.toLowerCase().includes(q) ||
+            p.description?.toLowerCase().includes(q);
+          if (!match) return false;
+        }
+
+        return true;
+      })
+      .sort((a, b) => {
+        if (sortBy === 'price-low') return a.price - b.price;
+        if (sortBy === 'price-high') return b.price - a.price;
+        if (sortBy === 'rating') return b.rating - a.rating;
+        if (sortBy === 'bestsellers') return (b.isBestseller ? 1 : 0) - (a.isBestseller ? 1 : 0);
+        return 0; // 'featured' retains curated catalog order
+      });
+  }, [
+    selectedCategory,
+    priceRange,
+    selectedSunlight,
+    selectedDifficulty,
+    selectedSize,
+    petSafeOnly,
+    airPurifierOnly,
+    rareOnly,
+    bestsellerOnly,
+    searchQuery,
+    sortBy,
+  ]);
+
+  return (
+    <div className="min-h-screen bg-offwhite text-charcoal flex flex-col">
+      <AnnouncementBar />
+      <Navbar />
+
+      <main className="flex-1 max-w-7xl mx-auto px-6 sm:px-12 py-12 w-full space-y-8">
+        {/* Shop Header */}
+        <ShopHeader
+          title="All Botanical Specimens"
+          subtitle="Explore our living gallery of curated indoor greenery, outdoor architectural statements, and rare collector drops."
+          itemCount={filteredProducts.length}
+          sortBy={sortBy}
+          onSortChange={setSortBy}
+          gridCols={gridCols}
+          onGridColsChange={setGridCols}
+          onOpenMobileFilters={() => setIsMobileFilterOpen(true)}
+          activeFilterCount={activeFilterCount}
+          searchQuery={searchQuery}
+          onSearchChange={setSearchQuery}
+        />
+
+        {/* Active Filter Chips Row */}
+        {activeFilterCount > 0 && (
+          <div className="flex flex-wrap items-center gap-2 pt-2">
+            <span className="text-xs font-mono uppercase text-charcoal/50 mr-1">
+              Active Filters:
+            </span>
+
+            {selectedCategory !== 'all' && (
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-cream rounded-pill text-xs font-sans text-forest border border-forest/15">
+                Category: {selectedCategory}
+                <button type="button" onClick={() => setSelectedCategory('all')}>
+                  <X className="w-3 h-3 text-charcoal/60 hover:text-earth" />
+                </button>
+              </span>
+            )}
+
+            {priceRange < 4000 && (
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-cream rounded-pill text-xs font-sans text-forest border border-forest/15">
+                Under ₹{priceRange}
+                <button type="button" onClick={() => setPriceRange(4000)}>
+                  <X className="w-3 h-3 text-charcoal/60 hover:text-earth" />
+                </button>
+              </span>
+            )}
+
+            {selectedSunlight.map((l) => (
+              <span key={l} className="inline-flex items-center gap-1.5 px-3 py-1 bg-cream rounded-pill text-xs font-sans text-forest border border-forest/15">
+                {l} Light
+                <button type="button" onClick={() => handleToggleSunlight(l)}>
+                  <X className="w-3 h-3 text-charcoal/60 hover:text-earth" />
+                </button>
+              </span>
+            ))}
+
+            {petSafeOnly && (
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-cream rounded-pill text-xs font-sans text-forest border border-forest/15">
+                Pet-Safe
+                <button type="button" onClick={() => setPetSafeOnly(false)}>
+                  <X className="w-3 h-3 text-charcoal/60 hover:text-earth" />
+                </button>
+              </span>
+            )}
+
+            {airPurifierOnly && (
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-cream rounded-pill text-xs font-sans text-forest border border-forest/15">
+                Air Purifier
+                <button type="button" onClick={() => setAirPurifierOnly(false)}>
+                  <X className="w-3 h-3 text-charcoal/60 hover:text-earth" />
+                </button>
+              </span>
+            )}
+
+            {rareOnly && (
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-cream rounded-pill text-xs font-sans text-forest border border-forest/15">
+                Rare Specimen
+                <button type="button" onClick={() => setRareOnly(false)}>
+                  <X className="w-3 h-3 text-charcoal/60 hover:text-earth" />
+                </button>
+              </span>
+            )}
+
+            <button
+              type="button"
+              onClick={handleResetFilters}
+              className="text-xs text-earth hover:underline font-mono tracking-wide ml-2"
+            >
+              Clear All
+            </button>
+          </div>
+        )}
+
+        {/* 2-Column Catalog Layout: Filter Sidebar (Desktop) + Product Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
+          {/* Desktop Left Filter Sidebar */}
+          <div className="hidden lg:block lg:col-span-1 sticky top-28">
+            <FilterSidebar
+              selectedCategory={selectedCategory}
+              onSelectCategory={setSelectedCategory}
+              priceRange={priceRange}
+              onPriceChange={setPriceRange}
+              selectedSunlight={selectedSunlight}
+              onToggleSunlight={handleToggleSunlight}
+              selectedDifficulty={selectedDifficulty}
+              onToggleDifficulty={handleToggleDifficulty}
+              selectedSize={selectedSize}
+              onToggleSize={handleToggleSize}
+              petSafeOnly={petSafeOnly}
+              onTogglePetSafe={() => setPetSafeOnly(!petSafeOnly)}
+              airPurifierOnly={airPurifierOnly}
+              onToggleAirPurifier={() => setAirPurifierOnly(!airPurifierOnly)}
+              rareOnly={rareOnly}
+              onToggleRare={() => setRareOnly(!rareOnly)}
+              bestsellerOnly={bestsellerOnly}
+              onToggleBestseller={() => setBestsellerOnly(!bestsellerOnly)}
+              onResetFilters={handleResetFilters}
+              activeFilterCount={activeFilterCount}
+            />
+          </div>
+
+          {/* Right Product Grid */}
+          <div className="lg:col-span-3">
+            {filteredProducts.length === 0 ? (
+              <div className="text-center py-24 bg-white rounded-editorial border border-forest/10 p-8 space-y-4">
+                <div className="w-16 h-16 rounded-full bg-cream mx-auto flex items-center justify-center text-forest/40">
+                  <Sparkles className="w-8 h-8" />
+                </div>
+                <h3 className="font-serif text-2xl text-forest">
+                  No matching botanical specimens found
+                </h3>
+                <p className="font-sans text-sm text-charcoal/70 max-w-md mx-auto leading-relaxed">
+                  Try broadening your price limit, toggling different light preferences, or clearing active filters.
+                </p>
+                <Button variant="secondary" size="sm" onClick={handleResetFilters} icon={RotateCcw}>
+                  Reset All Filters
+                </Button>
+              </div>
+            ) : (
+              <div
+                className={`grid gap-6 ${
+                  gridCols === 4
+                    ? 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4'
+                    : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
+                }`}
+              >
+                <AnimatePresence mode="popLayout">
+                  {filteredProducts.map((product) => (
+                    <motion.div
+                      layout
+                      key={product.id}
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.95 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <ProductCard product={product} />
+                    </motion.div>
+                  ))}
+                </AnimatePresence>
+              </div>
+            )}
+          </div>
+        </div>
+      </main>
+
+      {/* Mobile Slide-Over Filter Drawer */}
+      <AnimatePresence>
+        {isMobileFilterOpen && (
+          <div className="fixed inset-0 z-50 flex justify-end lg:hidden">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsMobileFilterOpen(false)}
+              className="fixed inset-0 bg-charcoal/60 backdrop-blur-sm"
+            />
+            <motion.div
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'spring', damping: 28, stiffness: 280 }}
+              className="relative w-full max-w-xs sm:max-w-sm bg-white h-full shadow-floating overflow-y-auto p-6 z-10"
+            >
+              <FilterSidebar
+                selectedCategory={selectedCategory}
+                onSelectCategory={setSelectedCategory}
+                priceRange={priceRange}
+                onPriceChange={setPriceRange}
+                selectedSunlight={selectedSunlight}
+                onToggleSunlight={handleToggleSunlight}
+                selectedDifficulty={selectedDifficulty}
+                onToggleDifficulty={handleToggleDifficulty}
+                selectedSize={selectedSize}
+                onToggleSize={handleToggleSize}
+                petSafeOnly={petSafeOnly}
+                onTogglePetSafe={() => setPetSafeOnly(!petSafeOnly)}
+                airPurifierOnly={airPurifierOnly}
+                onToggleAirPurifier={() => setAirPurifierOnly(!airPurifierOnly)}
+                rareOnly={rareOnly}
+                onToggleRare={() => setRareOnly(!rareOnly)}
+                bestsellerOnly={bestsellerOnly}
+                onToggleBestseller={() => setBestsellerOnly(!bestsellerOnly)}
+                onResetFilters={handleResetFilters}
+                activeFilterCount={activeFilterCount}
+                onCloseMobile={() => setIsMobileFilterOpen(false)}
+              />
+              <div className="pt-6">
+                <Button
+                  variant="primary"
+                  fullWidth={true}
+                  onClick={() => setIsMobileFilterOpen(false)}
+                >
+                  View {filteredProducts.length} Results
+                </Button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      <Footer />
+    </div>
+  );
+}
